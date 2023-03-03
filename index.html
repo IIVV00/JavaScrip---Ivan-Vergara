@@ -4,30 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación de Notas</title>
+    <title>Anotador</title>
     <link rel="stylesheet" href="estilos.css">
-    <head>
-    <body>
+  </head>
+  <body>
 
-      <h1>Aplicación de Notas</h1>
+    <h1>Bloc de Notas</h1>
       
-      <div id="app">
+    <div id="app">
 
-        <nav>
-          <input type="text" id="buscador" placeholder="Busqueda por título">
-          <button type="button" id="buscar_nota">Buscar</button>
-        </nav>
+      <nav>
+        <input type="text" id="buscador" placeholder="Busqueda por título">
+        <button type="button" id="buscar_nota" class="boton">Buscar</button>
+      </nav>
 
-        <form>
-          <input type="text" id="titulo" placeholder="Título de la nota">
-          <textarea id="contenido" placeholder="Contenido de la nota"></textarea>
-          <button type="button" id="agregar_nota">Agregar nota</button>
-        </form>
+      <form>
+        <input type="text" id="titulo" placeholder="Título de la nota">
+        <textarea id="contenido" placeholder="Contenido de la nota..."></textarea>
 
-        <div id="notas"></div>
-      
-      </div>
+        <div id="botonera">
+          <button type="button" id="agregar_nota" class="boton">Agregar nota</button>
+          <button type="button" id="eliminar_nota" class="boton">Eliminar nota</button>
+          <button type="button" id="mostrar_nota" class="boton">Mis notas</button>
+        </div>
+      </form>
     
+    </div>
+      
+    <div>
+      <div id="notificaciones" class="contenedor"></div>
+      <div id="historial" class="contenedor"></div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>

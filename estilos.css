@@ -37,12 +37,18 @@ body {
     border-radius: 5px;
     border: none;
   }
+
+  #contenido {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px; 
+  }
   
   input[type="text"] {
     text-align: center;
   }
   
-  button[type="button"] {
+  .boton[type="button"] {
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
@@ -51,10 +57,22 @@ body {
     cursor: pointer;
   }
   
-  button[type="button"]:hover {
+  .boton[type="button"]:hover {
     background-color: #d9d9d9;
     color: #1f1f1f;
   }
+
+  /* Estilos de la botonera */
+
+  #botonera {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .boton {
+    margin-right: 10px;
+  }
+  
   
   /* Estilos del buscador */
   
@@ -69,19 +87,50 @@ body {
     margin-right: 10px;
   }
   
-  /* Estilos de las notas */
+  /* Estilos del contenedor historial */
   
-  #notas {
-    margin-top: 20px;
+  .contenedor {
+    display: none;
+    max-width: 500px;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 1px solid #555555;
+    padding: 20px;
+    flex-direction: column;
+    align-items: left;
+  }
+
+  .contenedor h2 {
+    font-size: 22px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-align: left;
   }
   
-  #notas h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  #notas p {
+  .contenedor p {
+    font-size: 16px;
+    margin: 0;
     white-space: pre-wrap;
-    line-height: 1.5;
+    line-height: 1;
+  }
+
+  /* Nota agregada a partir de Js */ 
+
+  .Nota_contenedor {
+    background-color: #555555;
+    color: #d9d9d9;
+    border: 1px solid #555555;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: left;
   }
   
+  /* 
+  .Nota_contenedor:hover {
+    background-color: #d9d9d9;
+    color: #1f1f1f;
+  }
+  */
