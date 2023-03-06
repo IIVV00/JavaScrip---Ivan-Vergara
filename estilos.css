@@ -8,27 +8,28 @@ body {
     font-family: Arial, sans-serif;
     font-size: 16px;
   }
-  
+
   h1 {
     text-align: center;
   }
-  
+
   #app {
     max-width: 500px;
     margin: 0 auto;
+    margin-bottom: 10px;
     border-radius: 10px;
     border: 1px solid #555555;
     padding: 20px;
   }
-  
-  /* Estilos de los elementos de formulario */
-  
+
+/* Estilos de los elementos de formulario */
+
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   input[type="text"],
   textarea {
     width: 100%;
@@ -47,7 +48,7 @@ body {
   input[type="text"] {
     text-align: center;
   }
-  
+
   .boton[type="button"] {
     padding: 10px 20px;
     border-radius: 5px;
@@ -56,7 +57,7 @@ body {
     color: #d9d9d9;
     cursor: pointer;
   }
-  
+
   .boton[type="button"]:hover {
     background-color: #d9d9d9;
     color: #1f1f1f;
@@ -68,28 +69,27 @@ body {
     display: flex;
     justify-content: center;
   }
-  
+
   .boton {
     margin-right: 10px;
   }
-  
-  
-  /* Estilos del buscador */
-  
+
+/* Estilos del buscador */
+
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  
+
   #buscador {
     flex: 1;
     margin-right: 10px;
   }
-  
-  /* Estilos del contenedor historial */
-  
-  .contenedor {
+
+/* Estilos del contenedor historial y notificaciones */
+
+  .contenedor_notificaciones, .contenedor_historial {
     display: none;
     max-width: 500px;
     margin: 10px auto;
@@ -100,37 +100,44 @@ body {
     align-items: left;
   }
 
-  .contenedor h2 {
+  .contenedor_notificaciones h2, .contenedor_historial h2 {
     font-size: 22px;
     margin-bottom: 5px;
     margin-top: 5px;
     text-align: left;
   }
-  
-  .contenedor p {
+
+  .contenedor_notificaciones p, .contenedor_historial p {
     font-size: 16px;
     margin: 0;
     white-space: pre-wrap;
     line-height: 1;
   }
 
-  /* Nota agregada a partir de Js */ 
+/* Notificación a partir de Js */ 
 
-  .Nota_contenedor {
+  .Nota_agregada {
+    display: flex;
     background-color: #555555;
     color: #d9d9d9;
     border: 1px solid #555555;
     border-radius: 10px;
     margin-bottom: 5px;
     padding: 10px;
-    cursor: pointer;
     flex-direction: column;
     align-items: left;
   }
-  
+
   /* 
-  .Nota_contenedor:hover {
+  .Nota_agregada:hover {
     background-color: #d9d9d9;
     color: #1f1f1f;
   }
   */
+
+/* Animaciones de librería para notificacion*/ 
+
+.animate__animated.animate__fadeInDown {
+  --animate-duration: 01s;
+  --animate-delay: 1s;
+}

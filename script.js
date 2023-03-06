@@ -1,4 +1,4 @@
-let arreglo_notas = [{titulo: "Primera nota", contenido: "Contenido de la primera nota"},];
+let arreglo_notas = [{titulo: "Primera nota", contenido: "Contenido de la primera nota"}];
 
 class Nota {
   constructor(titulo, contenido) {
@@ -20,6 +20,7 @@ class Nota {
       document.getElementById("titulo").value = "";
       document.getElementById("contenido").value = "";
     }
+
   }
 
   /* -Me queda pendiente este método- 
@@ -38,27 +39,33 @@ class Nota {
   }
 
   mostrarNotificaciones(nota) {
-    notificaciones.style.display = "flex";
     let contenedor_notificaciones = document.getElementById("notificaciones");
+    let contenedor_notificaciones_hijo = document.createElement("div")
 
-    if (nota){ 
-      contenedor_notificaciones.innerHTML = `<button type="button" class="Nota_contenedor"><h2>${nota.titulo}</h2><p>${nota.contenido}</p></button>`;
+    setTimeout(() => {
+    document.querySelector(".contenedor_notificaciones").style.display = "flex";
+    contenedor_notificaciones.appendChild(contenedor_notificaciones_hijo);
+    contenedor_notificaciones.classList.add("animate__animated", "animate__fadeInDown");
+    
+    if (nota) { 
+      contenedor_notificaciones.innerHTML = `<div class="Nota_agregada"><h2>${nota.titulo}</h2><p>${nota.contenido}</p></div>`;
     } else {
       contenedor_notificaciones.innerHTML = `<h2>Lo siento, pero "${document.getElementById("buscador").value}" no aparece en la lista</h2>`;
     }
+  }, 200);
+
+
   }
  
   mostrarNota() {
-    cargarNotas();
-    let contenedor_css = document.querySelector(".contenedor");
-    contenedor_css.style.display = "flex";
+    document.querySelector(".contenedor_historial").style.display = "flex";
   
     let contenedor_historial = document.getElementById("historial");
   
     if (arreglo_notas.length > 0) {
-        contenedor_historial.innerHTML = arreglo_notas.map(nota => `<button type="button" class="Nota_contenedor"><h2>${nota.titulo}</h2><p>${nota.contenido}</p></button>`).join('');
+        contenedor_historial.innerHTML = arreglo_notas.map(nota => `<button type="button" class="Nota_agregada"><h2>${nota.titulo}</h2><p>${nota.contenido}</p></button>`).join('');
     } else {
-        contenedor_historial.innerHTML = "<p>No hay notas en el historial</p>";
+        contenedor_historial.innerHTML = `<h2>No hay notas en el historial<h2>`;
     } 
   }
 
@@ -69,29 +76,21 @@ class Nota {
 function init() {
   let nueva_nota = new Nota();
 
-  // Cargar notas guardadas al iniciar
-  cargarNotas();
+    // Cargar notas guardadas al iniciar
+    actualizarNotas();
 
   // Eventos de los botones
-  document.getElementById("agregar_nota").addEventListener("click", function() {nueva_nota.agregarNota(); guardarNotas();});
-  document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.eliminarNota(); guardarNotas();});
-  document.getElementById("buscar_nota").addEventListener("click", function() {nueva_nota.buscarNota(); guardarNotas();});
-  document.getElementById("mostrar_nota").addEventListener("click", function() {nueva_nota.mostrarNota(); guardarNotas()});
-
+  document.getElementById("agregar_nota").addEventListener("click", function() {nueva_nota.agregarNota(); actualizarNotas()});
+  document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.eliminarNota(); actualizarNotas()});
+  document.getElementById("buscar_nota").addEventListener("click", function() {nueva_nota.buscarNota(); actualizarNotas()});
+  document.getElementById("mostrar_nota").addEventListener("click", function() {nueva_nota.mostrarNota(); actualizarNotas()});
 }
-  
+
 init();
 
 // Storage - JSON
-    
-function guardarNotas() {
-  localStorage.setItem('notas', JSON.stringify(arreglo_notas));
-  cargarNotas() 
-}
 
-function cargarNotas() {
-  let notasGuardadas = localStorage.getItem('notas');
-  if (notasGuardadas) {
-    arreglo_notas = JSON.parse(notasGuardadas);
-  }
+function actualizarNotas() {
+  localStorage.setItem("notas", JSON.stringify(arreglo_notas));
+  return arreglo_notas = JSON.parse(localStorage.getItem("notas") || "[]");
 }
