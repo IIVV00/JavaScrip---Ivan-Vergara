@@ -22,11 +22,16 @@ class Nota {
     }
 
   }
-
-  /* -Me queda pendiente este método- 
+  /*
   eliminarNota() {
-  } */
+    
+  } 
 
+  modificarNota(nota) {
+    document.getElementById("titulo").value = nota.titulo;
+    document.getElementById("contenido").value = nota.contenido;
+  }
+  */
   buscarNota() {
     let indice_titulo = document.getElementById("buscador").value;
 
@@ -34,8 +39,6 @@ class Nota {
       let resultado_busqueda = arreglo_notas.find(nota => nota.titulo == indice_titulo);
       this.mostrarNotificaciones(resultado_busqueda);
     }
-    
-    document.getElementById("buscador").value = "";
   }
 
   mostrarNotificaciones(nota) {
@@ -43,18 +46,20 @@ class Nota {
     let contenedor_notificaciones_hijo = document.createElement("div")
 
     setTimeout(() => {
-    document.querySelector(".contenedor_notificaciones").style.display = "flex";
-    contenedor_notificaciones.appendChild(contenedor_notificaciones_hijo);
-    contenedor_notificaciones.classList.add("animate__animated", "animate__fadeInDown");
+      document.querySelector(".contenedor_notificaciones").style.display = "flex";
+      contenedor_notificaciones.appendChild(contenedor_notificaciones_hijo);
+      contenedor_notificaciones.classList.add("animate__animated", "animate__fadeInDown");
     
-    if (nota) { 
-      contenedor_notificaciones.innerHTML = `<div class="Nota_agregada"><h2>${nota.titulo}</h2><p>${nota.contenido}</p></div>`;
-    } else {
-      contenedor_notificaciones.innerHTML = `<h2>Lo siento, pero "${document.getElementById("buscador").value}" no aparece en la lista</h2>`;
-    }
-  }, 200);
+      if (nota) { 
+        contenedor_notificaciones.innerHTML = `<div class="Nota_agregada"><h2>${nota.titulo}</h2><p>${nota.contenido}</p></div>
+                                               <div class="botonera"><button type="button" id="eliminar_nota" class="boton">Eliminar nota</button>
+                                               <button type="button" id="modificarNota" class="boton">Modificar nota</button></div>`;
+      } else {
+        contenedor_notificaciones.innerHTML = `<h2>Lo siento, pero "${document.getElementById("buscador").value}" no aparece en la lista</h2>`;
+      }
 
-
+      document.getElementById("buscador").value = "";
+    }, 200);
   }
  
   mostrarNota() {
@@ -76,14 +81,15 @@ class Nota {
 function init() {
   let nueva_nota = new Nota();
 
-    // Cargar notas guardadas al iniciar
-    actualizarNotas();
+  // Cargar notas guardadas al iniciar
+  arreglo_notas = JSON.parse(localStorage.getItem('notas')) || [];
 
   // Eventos de los botones
   document.getElementById("agregar_nota").addEventListener("click", function() {nueva_nota.agregarNota(); actualizarNotas()});
-  document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.eliminarNota(); actualizarNotas()});
   document.getElementById("buscar_nota").addEventListener("click", function() {nueva_nota.buscarNota(); actualizarNotas()});
   document.getElementById("mostrar_nota").addEventListener("click", function() {nueva_nota.mostrarNota(); actualizarNotas()});
+  document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.eliminarNota(); actualizarNotas()});
+  document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.modificarNota(); actualizarNotas()});
 }
 
 init();
@@ -91,6 +97,6 @@ init();
 // Storage - JSON
 
 function actualizarNotas() {
-  localStorage.setItem("notas", JSON.stringify(arreglo_notas));
-  return arreglo_notas = JSON.parse(localStorage.getItem("notas") || "[]");
+  localStorage.setItem('notas', JSON.stringify(arreglo_notas));
+  return arreglo_notas;
 }

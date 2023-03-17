@@ -63,9 +63,9 @@ body {
     color: #1f1f1f;
   }
 
-  /* Estilos de la botonera */
+  /* Estilos de la.botonera */
 
-  #botonera {
+  .botonera {
     display: flex;
     justify-content: center;
   }
