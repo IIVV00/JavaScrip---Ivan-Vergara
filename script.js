@@ -22,16 +22,24 @@ class Nota {
     }
 
   }
-  /*
-  eliminarNota() {
-    
-  } 
+
+  eliminarNota(nota) {
+    let eliminar_item = arreglo_notas.indexOf(nota);
+  
+    arreglo_notas.splice(eliminar_item, 1);
+    console.log(arreglo_notas);
+
+   // let contenedor_notificaciones_hijo = document.getElementsByTagName("contenedor_notificaciones_hijo");
+    //contenedor_notificaciones_hijo.remove();
+
+  }
+  
 
   modificarNota(nota) {
     document.getElementById("titulo").value = nota.titulo;
     document.getElementById("contenido").value = nota.contenido;
   }
-  */
+
   buscarNota() {
     let indice_titulo = document.getElementById("buscador").value;
 
@@ -51,14 +59,18 @@ class Nota {
       contenedor_notificaciones.classList.add("animate__animated", "animate__fadeInDown");
     
       if (nota) { 
-        contenedor_notificaciones.innerHTML = `<div class="Nota_agregada"><h2>${nota.titulo}</h2><p>${nota.contenido}</p></div>
-                                               <div class="botonera"><button type="button" id="eliminar_nota" class="boton">Eliminar nota</button>
-                                               <button type="button" id="modificarNota" class="boton">Modificar nota</button></div>`;
+        contenedor_notificaciones.innerHTML = `<div class="Nota_agregada"><h2 id="Nota_agregada_notificaciones">${nota.titulo}</h2><p>${nota.contenido}</p></div>
+                                               <div class="botonera"><button type="button" id="modificarNota" class="boton">Modificar nota</button>
+                                               <button type="button" id="eliminar_nota" class="boton">Eliminar nota</button></div>`;
+                
+                                               document.getElementById("modificarNota").addEventListener("click", () => {this.modificarNota(nota);});
+                                               document.getElementById("eliminar_nota").addEventListener("click", () => {this.eliminarNota(nota);});
       } else {
         contenedor_notificaciones.innerHTML = `<h2>Lo siento, pero "${document.getElementById("buscador").value}" no aparece en la lista</h2>`;
       }
 
       document.getElementById("buscador").value = "";
+      clearTimeout()
     }, 200);
   }
  
@@ -88,8 +100,8 @@ function init() {
   document.getElementById("agregar_nota").addEventListener("click", function() {nueva_nota.agregarNota(); actualizarNotas()});
   document.getElementById("buscar_nota").addEventListener("click", function() {nueva_nota.buscarNota(); actualizarNotas()});
   document.getElementById("mostrar_nota").addEventListener("click", function() {nueva_nota.mostrarNota(); actualizarNotas()});
-  document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.eliminarNota(); actualizarNotas()});
-  document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.modificarNota(); actualizarNotas()});
+  //document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.eliminarNota(); actualizarNotas()});
+  //document.getElementById("eliminar_nota").addEventListener("click", function() {nueva_nota.modificarNota(); actualizarNotas()});
 }
 
 init();
